@@ -1,0 +1,12 @@
+
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: niuniu
+      password: louis
+
+server:
+  port: 8989
+
