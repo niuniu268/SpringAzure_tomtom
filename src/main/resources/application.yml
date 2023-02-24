@@ -7,8 +7,8 @@ spring:
       username: niuniu
       password: louis
 
-server:
-  port: 8989
+#server:
+#  port: 8989
 
 key: vMzB6Sn3NOG3aXtHTOnd7TLg8aiwIM2f
 
