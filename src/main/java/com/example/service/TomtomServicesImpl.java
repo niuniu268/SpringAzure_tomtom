@@ -26,7 +26,11 @@ public class TomtomServicesImpl {
 
     public Favorites fillInFavoritesList(String start, String destination, String way) throws URISyntaxException {
 
-        Map itinerary = itinerary( start, destination, way );
+        String latitude = getLatitude( start );
+
+        String latitude1 = getLatitude( destination );
+
+        Map itinerary = itinerary( latitude, latitude1, way );
 
         Object routes = itinerary.get( "routes" );
         String s = JSON.toJSONString( routes );
@@ -37,15 +41,15 @@ public class TomtomServicesImpl {
 
         Travels summary = routes2.getSummary( );
 
-        Favorites ff = new Favorites();
+        Favorites data = new Favorites();
 
-        ff.setStart( start );
-        ff.setDestination( destination );
-        ff.setWay( way );
-        ff.setDistance( summary.getLengthInMeters() );
-        ff.setDuration( summary.getTravelTimeInSeconds() );
+        data.setStart( start );
+        data.setDestination( destination );
+        data.setWay( way );
+        data.setDistance( summary.getLengthInMeters() );
+        data.setDuration( summary.getTravelTimeInSeconds() );
 
-        return ff;
+        return data;
     }
 
     public Map itinerary (String start, String destination, String way) throws URISyntaxException {

@@ -27,7 +27,10 @@ public class FavoritesController {
     public void Insert(@PathVariable Integer no){
 
         Favorites[] fArray = tomtomController.fArray;
-        favoritesServices.insert( fArray[no] );
+
+
+        favoritesServices.insert( fArray[no - 1] );
+
 
     }
 
