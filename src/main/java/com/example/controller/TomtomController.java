@@ -3,6 +3,7 @@ package com.example.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson2.JSONArray;
 import com.example.pojo.Address;
+import com.example.pojo.Favorites;
 import com.example.pojo.Latitude;
 import com.example.service.TomtomServicesImpl;
 import org.apache.ibatis.javassist.expr.NewArray;
@@ -27,13 +28,14 @@ public class TomtomController {
     @Autowired
     private TomtomServicesImpl tomtomServices;
 
+    public Favorites[] fArray = new Favorites[3];
 
 
     @GetMapping("/{start}/{destination}/{way}")
     @ResponseBody
-    public String[] searchPoint(@PathVariable String start, @PathVariable String destination, @PathVariable String way ) throws URISyntaxException {
+    public Map[] searchPoint(@PathVariable String start, @PathVariable String destination, @PathVariable String way ) throws URISyntaxException {
 
-        String[] arraylist = new String[3];
+        Map[] arraylist = new Map[3];
 
 
         String latitude = tomtomServices.getLatitude( start );
@@ -42,21 +44,20 @@ public class TomtomController {
 
         Map pedestrian = tomtomServices.itinerary( latitude, latitude1, "pedestrian" );
 
-        arraylist[0] = JSON.toJSONString( pedestrian);
+        arraylist[0] = pedestrian;
+        fArray[0] = tomtomServices.fillInFavoritesList( start, destination, "pedestrian" );
 
         if (!Objects.equals( way, "pedestrian" )){
 
             Map car = tomtomServices.itinerary( latitude, latitude1, "car" );
 
-            arraylist[1] = JSON.toJSONString( car );
+            arraylist[1] = car;
+            fArray[1] = tomtomServices.fillInFavoritesList( start, destination, "car" );
 
         }
 
 
         return arraylist;
-
-
-
 
 
     }

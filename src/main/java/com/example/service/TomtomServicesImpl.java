@@ -1,8 +1,8 @@
 package com.example.service;
 
 import com.alibaba.fastjson.JSON;
-import com.example.pojo.Address;
-import com.example.pojo.Latitude;
+import com.example.pojo.*;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +21,32 @@ public class TomtomServicesImpl {
 
     @Value( "${key}" )
     private String key ;
+
+
+
+    public Favorites fillInFavoritesList(String start, String destination, String way) throws URISyntaxException {
+
+        Map itinerary = itinerary( start, destination, way );
+
+        Object routes = itinerary.get( "routes" );
+        String s = JSON.toJSONString( routes );
+
+        List <Routes> routes1 = JSON.parseArray( s, Routes.class );
+
+        Routes routes2 = routes1.get( 0 );
+
+        Travels summary = routes2.getSummary( );
+
+        Favorites ff = new Favorites();
+
+        ff.setStart( start );
+        ff.setDestination( destination );
+        ff.setWay( way );
+        ff.setDistance( summary.getLengthInMeters() );
+        ff.setDuration( summary.getTravelTimeInSeconds() );
+
+        return ff;
+    }
 
     public Map itinerary (String start, String destination, String way) throws URISyntaxException {
 
