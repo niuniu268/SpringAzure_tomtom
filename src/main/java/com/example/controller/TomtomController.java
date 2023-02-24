@@ -45,14 +45,14 @@ public class TomtomController {
         Map pedestrian = tomtomServices.itinerary( latitude, latitude1, "pedestrian" );
 
         arraylist[0] = pedestrian;
-        fArray[0] = tomtomServices.fillInFavoritesList( start, destination, "pedestrian" );
+        fArray[0] = tomtomServices.fillInFavoritesList( latitude, latitude1, "pedestrian" );
 
         if (!Objects.equals( way, "pedestrian" )){
 
             Map car = tomtomServices.itinerary( latitude, latitude1, "car" );
 
             arraylist[1] = car;
-            fArray[1] = tomtomServices.fillInFavoritesList( start, destination, "car" );
+            fArray[1] = tomtomServices.fillInFavoritesList( latitude, latitude1, "car" );
 
         }
 

@@ -50,6 +50,7 @@ public class TomtomServicesImpl {
 
     public Map itinerary (String start, String destination, String way) throws URISyntaxException {
 
+
         String uri = "https://api.tomtom.com/routing/1/calculateRoute/"+start+":"+destination+"/json?language=en-US&instructionsType=text&travelMode="+way+"&key="+key;
 
         ResponseEntity <Map> entity = restTemplate.getForEntity( new URI( uri ), Map.class );
