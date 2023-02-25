@@ -24,13 +24,13 @@ public class TomtomServicesImpl {
 
 
 
-    public Favorites fillInFavoritesList(String start, String destination, String way) throws URISyntaxException {
+    public Favorites fillInFavoritesList(String start, String destination, String way, Integer routeType) throws URISyntaxException {
 
         String latitude = getLatitude( start );
 
         String latitude1 = getLatitude( destination );
 
-        Map itinerary = itinerary( latitude, latitude1, way );
+        Map itinerary = itinerary( latitude, latitude1, way, routeType );
 
         Object routes = itinerary.get( "routes" );
         String s = JSON.toJSONString( routes );
@@ -52,10 +52,16 @@ public class TomtomServicesImpl {
         return data;
     }
 
-    public Map itinerary (String start, String destination, String way) throws URISyntaxException {
+    public Map itinerary (String start, String destination, String way, Integer routeType) throws URISyntaxException {
 
+        String uri;
 
-        String uri = "https://api.tomtom.com/routing/1/calculateRoute/"+start+":"+destination+"/json?language=en-US&instructionsType=text&travelMode="+way+"&key="+key;
+        if (routeType == 0){
+             uri = "https://api.tomtom.com/routing/1/calculateRoute/"+start+":"+destination+"/json?language=en-US&instructionsType=text&travelMode="+way+"&key="+key;
+        } else {
+             uri = "https://api.tomtom.com/routing/1/calculateRoute/"+start+":"+destination+"/json?language=en-US&instructionsType=text&routeType=eco&travelMode="+way+"&key="+key;
+
+        }
 
         ResponseEntity <Map> entity = restTemplate.getForEntity( new URI( uri ), Map.class );
 

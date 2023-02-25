@@ -42,17 +42,22 @@ public class TomtomController {
 
         String latitude1 = tomtomServices.getLatitude( destination );
 
-        Map pedestrian = tomtomServices.itinerary( latitude, latitude1, "pedestrian" );
+        Map pedestrian = tomtomServices.itinerary( latitude, latitude1, "pedestrian", 0 );
 
         arraylist[0] = pedestrian;
-        fArray[0] = tomtomServices.fillInFavoritesList( start, destination, "pedestrian" );
+        fArray[0] = tomtomServices.fillInFavoritesList( start, destination, "pedestrian", 0 );
 
         if (!Objects.equals( way, "pedestrian" )){
 
-            Map car = tomtomServices.itinerary( latitude, latitude1, "car" );
+            Map car1 = tomtomServices.itinerary( latitude, latitude1, "car",0 );
 
-            arraylist[1] = car;
-            fArray[1] = tomtomServices.fillInFavoritesList( start, destination, "car" );
+            arraylist[1] = car1;
+            fArray[1] = tomtomServices.fillInFavoritesList( start, destination, "car", 0 );
+
+            Map car2 = tomtomServices.itinerary( latitude, latitude1, "car",1 );
+
+            arraylist[2] = car2;
+            fArray[2] = tomtomServices.fillInFavoritesList( start, destination, "car", 1 );
 
         }
 
@@ -65,6 +70,22 @@ public class TomtomController {
 
         return arraylist;
 
+
+    }
+
+
+    @GetMapping("/abbe/{start}/{destination}")
+    @ResponseBody
+    public Map searchStation(@PathVariable String start, @PathVariable String destination ) throws URISyntaxException {
+
+
+        String latitude = tomtomServices.getLatitude( start );
+
+        String latitude1 = tomtomServices.getLatitude( destination );
+
+        Map pedestrian = tomtomServices.itinerary( latitude, latitude1, "pedestrian", 0 );
+
+        return pedestrian;
 
     }
 

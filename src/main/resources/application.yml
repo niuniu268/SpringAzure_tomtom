@@ -1,14 +1,22 @@
 
-spring:
-  datasource:
-    druid:
-      url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: niuniu
-      password: louis
+#spring:
+#  datasource:
+#    druid:
+#      url: jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      username: niuniu
+#      password: louis
+
 
 #server:
 #  port: 8989
 
 key: vMzB6Sn3NOG3aXtHTOnd7TLg8aiwIM2f
 
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://azuremysql-1.mysql.database.azure.com:3306/test?useSSL=true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: niuniu
+      password: louis268@
