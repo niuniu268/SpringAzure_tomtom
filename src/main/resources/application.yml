@@ -1,9 +1,21 @@
 key: vMzB6Sn3NOG3aXtHTOnd7TLg8aiwIM2f
 
+#spring:
+#  datasource:
+#    druid:
+#      url: jdbc:mysql://azuremysql-1.mysql.database.azure.com:3306/test?useSSL=true
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      username: niuniu
+#      password: louis268@
 spring:
   datasource:
-    druid:
-      url: jdbc:mysql://azuremysql-1.mysql.database.azure.com:3306/test?useSSL=true
+    url: jdbc:mysql://azuremysql-1.mysql.database.azure.com:3306/test?serverTimezone=UTC
+    hikari:
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: niuniu
       password: louis268@
+
+
+  sql:
+    init:
+      mode=always
